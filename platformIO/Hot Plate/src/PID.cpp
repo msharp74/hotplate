@@ -1,14 +1,11 @@
-class PID
+#include "PID.h"
+
+double PID::updateParam(double targetValue, double currentValue)
 {
-  private:
-    double m_kp {0};
-    double m_ki {0};
-    double m_kd {0};
+  double error {targetValue - currentValue};
+  errorSum += error;
 
-  public:
-    PID(double kp, double ki, double kd)
-      : m_kp {kp}, m_ki {ki}, m_kd {kd}
-    {}
-    
-
-};
+  double proportionalTerm {m_kp * error};
+  double integralTerm {m_ki * errorSum};
+  double differentialTerm {m_kd};
+}
