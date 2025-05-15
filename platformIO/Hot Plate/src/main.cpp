@@ -4,8 +4,7 @@
 
 uint8_t returnVal {0};
 uint8_t data[3] {0};
-uint8_t csPin {5};
-MCP3204 adc {csPin};
+MCP3204 adc {5};
 
 void setup() 
 {
@@ -17,6 +16,6 @@ void setup()
 void loop() 
 {
   Serial.println(adc.readADC(0, 3.3));
-  
+
   delay(2000);
 }

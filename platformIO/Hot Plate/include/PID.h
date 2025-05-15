@@ -7,9 +7,11 @@ class PID
     double m_kp {};
     double m_ki {};
     double m_kd {};
-    double errorSum {};
-    double previousParamValue[3] {};
-    double previouParamTime[3] {};
+    double m_errorSum {};
+    double m_previousParamValue[3] {};
+    long m_previousParamTime[3] {};
+
+    void updateParamArrays(double error, double ms);
 
   public:
     PID(double kp, double ki, double kd)
