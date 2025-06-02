@@ -16,7 +16,7 @@ double PID::updateParam(double targetValue, double currentValue, double timeInte
   double derivative {(previousErrorValue[0] - 4 * previousErrorValue[1] + 3 * previousErrorValue[2]) / (2* timeArrayAverage())};
 
   double proportionalTerm {m_kp * error};
-  double integralTerm {m_ki * errorSum};
+  double integralTerm {m_ki * m_errorSum};
   double differentialTerm {m_kd * derivative};
 
   m_controlParameter += proportionalTerm + integralTerm + differentialTerm;

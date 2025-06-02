@@ -8,7 +8,9 @@ class PID
     double m_kp {};
     double m_ki {};
     double m_kd {};
-    double errorSum {};
+    double m_errorSum {};
+    double previousParamValue[3] {};
+    double previousParamTime[3] {};
     double previousErrorValue[3] {};
     double previousErrorTime[3] {};
 
