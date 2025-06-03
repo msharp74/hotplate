@@ -6,12 +6,8 @@ double PID::updateParam(double targetValue, double currentValue, double timeInte
   double error {targetValue - currentValue};
   updateArray(previousErrorValue, error);
   updateArray(previousErrorTime, timeInterval);
-  updateParamArrays(error, millis());
 
   m_errorSum += error;
-  //three-point backward difference
-  double derivative {(m_previousParamTime[0] - 4 * m_previousParamTime[1] + 3 * m_previousParamTime[2]) / (2 * ((m_previousParamTime[1] - m_previousParamTime[0]) + (m_previousParamTime[2] - m_previousParamTime[1])) / 2)};
-
   //Three-point backward difference formula
   double derivative {(previousErrorValue[0] - 4 * previousErrorValue[1] + 3 * previousErrorValue[2]) / (2* timeArrayAverage())};
 
@@ -19,7 +15,7 @@ double PID::updateParam(double targetValue, double currentValue, double timeInte
   double integralTerm {m_ki * m_errorSum};
   double differentialTerm {m_kd * derivative};
 
-  m_controlParameter += proportionalTerm + integralTerm + differentialTerm;
+  m_controlParameter = proportionalTerm + integralTerm + differentialTerm;
   return m_controlParameter;
 }
 
@@ -29,7 +25,7 @@ double PID::timeArrayAverage()
 
   for (int index {0}; index < 3; index ++)
   {
-    sum += previousErrorValue[index];
+    sum += previousErrorTime[index];
   }
 
   double average {sum / 3};
